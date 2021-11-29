@@ -3,13 +3,11 @@ const mongoose = require("mongoose");
 
 
 
-
-const skillSchema = new mongoose.Schema(
+const workerSchema = new mongoose.Schema(
     {
-        company_name: {type:String, required: true},
-        company_type: {type: String,required:true},
-        job_skill: {type:String,required:true},
-        job_type: {type:String,required:true},
+        company_name: {type: String, required: true},
+        company_type: {type: String,required: true},
+  
         user_id: {
          type: mongoose.Schema.Types.ObjectId,
          ref: "user",
@@ -28,4 +26,5 @@ const skillSchema = new mongoose.Schema(
         timestamp: true,
     }
 );
-module.exports = mongoose.model("skill",skillSchema);//company
+module.exports =mongoose.model("worker",workerSchema);//company
+
