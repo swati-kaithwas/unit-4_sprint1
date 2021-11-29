@@ -29,7 +29,7 @@ const companySchema = new mongoose.Schema(
          ref: "user",
          required: true,
         },
-      Company_name: {type:String, required: true},
+      company_name: {type:String, required: true},
       company_type: {type: String,required:true},
 
       
@@ -45,8 +45,8 @@ const Company =mongoose.model("company",companySchema);//company
 
 const workerSchema = new mongoose.Schema(
     {
-        Company_name: {type:String, required: true},
-        company_type: {type: String,required:true},
+        company_name: {type: String, required: true},
+        company_type: {type: String,required: true},
   
         user_id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -71,8 +71,9 @@ const Worker =mongoose.model("worker",workerSchema);//company
 
 const skillSchema = new mongoose.Schema(
     {
-        Company_name: {type:String, required: true},
+        company_name: {type:String, required: true},
         company_type: {type: String,required:true},
+        job_skill: {type:String,required:true},
         job_type: {type:String,required:true},
         user_id: {
          type: mongoose.Schema.Types.ObjectId,
@@ -328,5 +329,6 @@ app.delete("/skills/: id", async (req, res) => {
 
 
 app.listen(2567, async function () {
+    await connect();
     console.log("listening on port 2567");
 })
