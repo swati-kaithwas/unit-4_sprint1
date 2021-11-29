@@ -97,6 +97,64 @@ const Skill =mongoose.model("skill",skillSchema);//company
 const app = express();
 app.use(express.json());//midlle
 
+//user crud
+app.post("/users", async (req,res) => {
+    try {
+        const user = await User.create(req.body);
+
+        return res.status(201).send(user);
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+
+    }
+});
+
+app.get("/users", async (req, res) => {
+    try{
+        const users = await User.find().lean().exec();
+        return res.send({ users });
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+    }
+});
+
+
+app.get("/users/: id", async (req, res) => {
+    try{
+        const users = await User.findById(req.params.id).lean().exec();
+        return res.send(user);
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+    }
+});
+
+
+app.patch("/users/: id", async (req, res) => {
+    try{
+        const users = await User.findByIdAndUpdate(req.params.id,req.body, {
+            new: true,
+        })
+        .lean()
+        .exec();
+        return res.status(201).send(user);
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+    }
+});
+
+
+
+app.delete("/users/: id", async (req, res) => {
+    try{
+        const users = await User.findByIdAndDelete(req.params.id).lean().exec();
+        return res.status(200).send(user);
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+    }
+});
+
+
+//crud company
 app.listen(2567, async function () {
     console.log("listening on port 2567");
 })
