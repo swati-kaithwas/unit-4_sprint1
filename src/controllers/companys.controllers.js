@@ -24,6 +24,15 @@ router.get("", async (req, res) => {
 });
 
 
+router.get("/openings", async (req, res) => {
+    try{
+        const companys = await Company.find().sort({"openings":1}).lean().exec();
+        return res.send( companys[companys.length-1]);
+    } catch (e) {
+        res.status(500).json({ message: e.message, status: "Failed" });
+    }
+});
+
 router.get("/:id", async (req, res) => {
     try{
         const companys = await Company.findById(req.params.id).lean().exec();
